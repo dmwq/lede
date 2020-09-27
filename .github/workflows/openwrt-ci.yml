@@ -53,14 +53,15 @@ jobs:
       - name: Generate configuration file
         run: make defconfig
 
+      - name: Import external feeds
+        run: |
+          git clone https://github.com/Lienol/openwrt-package package/lienol
+      
       - name: Make download
         run: |
           make download -j8
           find dl -size -1024c -exec rm -f {} \;
-      
-      - name: Import external feeds
-        run: |
-          git clone https://github.com/Lienol/openwrt-package package/lienol
+          
       
       - name: Compile firmware
         run: |
